@@ -169,6 +169,9 @@ export default function TimelineItem({
         e.stopPropagation()
         onSelect(item)
       }}
+      onDoubleClick={(e) => {
+        e.stopPropagation()
+      }}
       onMouseDown={(e) => handleMouseDown(e, 'drag')}
     >
       {/* Left resize handle */}
