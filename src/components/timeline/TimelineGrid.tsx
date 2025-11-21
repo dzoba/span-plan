@@ -93,7 +93,7 @@ export default function TimelineGrid({
     <div className="flex-1 flex flex-col overflow-hidden bg-gray-50">
       <div
         ref={containerRef}
-        className="flex-1 overflow-auto"
+        className="flex-1 overflow-auto overscroll-x-contain"
       >
         <div style={{ width: totalWidth + 150 }} className="min-h-full">
           {/* Time markers header */}
