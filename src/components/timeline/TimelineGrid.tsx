@@ -114,7 +114,7 @@ export default function TimelineGrid({
           </div>
 
           {/* Rows */}
-          {timeline.rows.sort((a, b) => a.order - b.order).map((row) => (
+          {timeline.rows.sort((a, b) => a.order - b.order).map((row, index) => (
             <TimelineRow
               key={row.id}
               row={row}
@@ -130,6 +130,8 @@ export default function TimelineGrid({
               onDeleteItem={onDeleteItem}
               onSelectItem={onSelectItem}
               selectedItemId={selectedItemId}
+              allRowIds={timeline.rows.sort((a, b) => a.order - b.order).map(r => r.id)}
+              rowIndex={index}
             />
           ))}
 

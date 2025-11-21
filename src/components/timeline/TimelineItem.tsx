@@ -12,24 +12,28 @@ interface TimelineItemProps {
   onDelete: (itemId: string) => void
   onSelect: (item: TimelineItemType | null) => void
   isSelected: boolean
+  allRowIds: string[]
+  rowIndex: number
 }
 
 export default function TimelineItem({
   item,
   baseDate,
   viewMode,
-  rowHeight: _rowHeight,
+  rowHeight,
   onUpdate,
   onDelete: _onDelete,
   onSelect,
-  isSelected
+  isSelected,
+  allRowIds,
+  rowIndex
 }: TimelineItemProps) {
   const [isEditingTitle, setIsEditingTitle] = useState(false)
   const [titleValue, setTitleValue] = useState(item.title)
   const [isDragging, setIsDragging] = useState(false)
   const [isResizing, setIsResizing] = useState<'left' | 'right' | null>(null)
   const itemRef = useRef<HTMLDivElement>(null)
-  const dragStartRef = useRef({ x: 0, startDate: '', endDate: '' })
+  const dragStartRef = useRef({ x: 0, y: 0, startDate: '', endDate: '', rowIndex: 0 })
 
   const pixelsPerUnit = getPixelsPerUnit(viewMode)
 
@@ -72,8 +76,10 @@ export default function TimelineItem({
 
     dragStartRef.current = {
       x: e.clientX,
+      y: e.clientY,
       startDate: item.startDate,
-      endDate: item.endDate
+      endDate: item.endDate,
+      rowIndex: rowIndex
     }
 
     if (type === 'drag') {
@@ -110,9 +116,17 @@ export default function TimelineItem({
       if (isDragging) {
         const newStart = addDays(originalStart, deltaDays)
         const newEnd = addDays(originalEnd, deltaDays)
+
+        // Calculate row change based on Y movement
+        const deltaY = e.clientY - dragStartRef.current.y
+        const rowDelta = Math.round(deltaY / rowHeight)
+        const newRowIndex = Math.max(0, Math.min(allRowIds.length - 1, dragStartRef.current.rowIndex + rowDelta))
+        const newRowId = allRowIds[newRowIndex]
+
         onUpdate(item.id, {
           startDate: format(newStart, 'yyyy-MM-dd'),
-          endDate: format(newEnd, 'yyyy-MM-dd')
+          endDate: format(newEnd, 'yyyy-MM-dd'),
+          rowId: newRowId
         })
       } else if (isResizing === 'left') {
         const newStart = addDays(originalStart, deltaDays)
@@ -143,7 +157,7 @@ export default function TimelineItem({
       document.removeEventListener('mousemove', handleMouseMove)
       document.removeEventListener('mouseup', handleMouseUp)
     }
-  }, [isDragging, isResizing, item.id, onUpdate, pixelsPerUnit, viewMode])
+  }, [isDragging, isResizing, item.id, onUpdate, pixelsPerUnit, viewMode, rowHeight, allRowIds])
 
   const handleTitleSubmit = () => {
     onUpdate(item.id, { title: titleValue || 'Untitled' })
@@ -181,7 +195,7 @@ export default function TimelineItem({
       />
 
       {/* Content */}
-      <div className="flex-1 min-w-0 px-1">
+      <div className="flex-1 min-w-0 px-1 flex flex-col justify-center">
         {isEditingTitle ? (
           <input
             type="text"
@@ -195,21 +209,28 @@ export default function TimelineItem({
                 setIsEditingTitle(false)
               }
             }}
-            className="w-full bg-white/90 px-1 py-0.5 text-xs rounded focus:outline-none"
+            className="w-full bg-white/90 px-1 py-0.5 text-sm rounded focus:outline-none"
             autoFocus
             onClick={(e) => e.stopPropagation()}
           />
         ) : (
-          <span
-            className="text-xs font-medium text-white truncate block cursor-text"
-            onClick={(e) => {
-              e.stopPropagation()
-              setTitleValue(item.title)
-              setIsEditingTitle(true)
-            }}
-          >
-            {item.title}
-          </span>
+          <>
+            <span
+              className="text-sm font-semibold text-white truncate block cursor-text leading-tight"
+              onClick={(e) => {
+                e.stopPropagation()
+                setTitleValue(item.title)
+                setIsEditingTitle(true)
+              }}
+            >
+              {item.title}
+            </span>
+            {item.subtitle && (
+              <span className="text-xs text-white/70 truncate block leading-tight">
+                {item.subtitle}
+              </span>
+            )}
+          </>
         )}
       </div>
 

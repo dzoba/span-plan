@@ -16,6 +16,8 @@ interface TimelineRowProps {
   onDeleteItem: (itemId: string) => void
   onSelectItem: (item: TimelineItemType | null) => void
   selectedItemId: string | null
+  allRowIds: string[]
+  rowIndex: number
 }
 
 export default function TimelineRow({
@@ -31,7 +33,9 @@ export default function TimelineRow({
   onUpdateItem,
   onDeleteItem,
   onSelectItem,
-  selectedItemId
+  selectedItemId,
+  allRowIds,
+  rowIndex
 }: TimelineRowProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [editValue, setEditValue] = useState(row.name)
@@ -108,6 +112,8 @@ export default function TimelineRow({
             onDelete={onDeleteItem}
             onSelect={onSelectItem}
             isSelected={selectedItemId === item.id}
+            allRowIds={allRowIds}
+            rowIndex={rowIndex}
           />
         ))}
       </div>
