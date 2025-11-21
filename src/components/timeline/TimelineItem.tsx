@@ -35,6 +35,8 @@ export default function TimelineItem({
   const [titleValue, setTitleValue] = useState(item.title)
   const [isDragging, setIsDragging] = useState(false)
   const [isResizing, setIsResizing] = useState<'left' | 'right' | null>(null)
+  const [isHovered, setIsHovered] = useState(false)
+  const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const itemRef = useRef<HTMLDivElement>(null)
   const dragStartRef = useRef({ x: 0, y: 0, startDate: '', endDate: '', rowIndex: 0 })
 
@@ -194,7 +196,32 @@ export default function TimelineItem({
         e.stopPropagation()
       }}
       onMouseDown={(e) => handleMouseDown(e, 'drag')}
+      onMouseEnter={(e) => {
+        setIsHovered(true)
+        setTooltipPosition({ x: e.clientX, y: e.clientY })
+      }}
+      onMouseLeave={() => setIsHovered(false)}
+      onMouseMove={(e) => {
+        if (isHovered) {
+          setTooltipPosition({ x: e.clientX, y: e.clientY })
+        }
+      }}
     >
+      {/* Tooltip */}
+      {isHovered && !isDragging && !isResizing && width < 100 && (
+        <div
+          style={{
+            position: 'fixed',
+            left: tooltipPosition.x + 10,
+            top: tooltipPosition.y - 30,
+            zIndex: 1000
+          }}
+          className="bg-gray-900 text-white text-xs px-2 py-1 rounded shadow-lg pointer-events-none whitespace-nowrap"
+        >
+          <div className="font-medium">{item.title}</div>
+          {item.subtitle && <div className="text-gray-300">{item.subtitle}</div>}
+        </div>
+      )}
       {/* Left resize handle */}
       <div
         className="absolute left-0 top-0 bottom-0 w-2 cursor-ew-resize hover:bg-black/10 rounded-l-md"
