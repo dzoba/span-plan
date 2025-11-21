@@ -32,11 +32,22 @@ export default function TimelineGrid({
 }: TimelineGridProps) {
   const containerRef = useRef<HTMLDivElement>(null)
   const [baseDate] = useState(() => startOfDay(new Date()))
+  const [zoomScale, setZoomScale] = useState(1)
 
-  const pixelsPerUnit = getPixelsPerUnit(viewMode)
+  const basePixelsPerUnit = getPixelsPerUnit(viewMode)
+  const pixelsPerUnit = basePixelsPerUnit * zoomScale
   const totalUnits = viewMode === 'month' ? 24 : viewMode === 'week' ? 52 : 365
   const totalWidth = totalUnits * pixelsPerUnit
   const rowHeight = 60
+
+  const handleWheel = (e: React.WheelEvent) => {
+    // Only zoom on vertical scroll (deltaY), let horizontal scroll work normally
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+      e.preventDefault()
+      const zoomFactor = e.deltaY > 0 ? 0.95 : 1.05
+      setZoomScale(prev => Math.max(0.2, Math.min(5, prev * zoomFactor)))
+    }
+  }
 
   const getTimeMarkers = () => {
     const endDate = addDays(baseDate, viewMode === 'month' ? 730 : viewMode === 'week' ? 364 : 365)
@@ -94,6 +105,7 @@ export default function TimelineGrid({
       <div
         ref={containerRef}
         className="flex-1 overflow-auto overscroll-x-contain"
+        onWheel={handleWheel}
       >
         <div style={{ width: totalWidth + 150 }} className="min-h-full">
           {/* Time markers header */}
@@ -140,6 +152,7 @@ export default function TimelineGrid({
                   item={item}
                   baseDate={baseDate}
                   viewMode={viewMode}
+                  pixelsPerUnit={pixelsPerUnit}
                   rowHeight={rowHeight}
                   rowIndex={rowIndex}
                   rowTop={rowIndex * rowHeight}

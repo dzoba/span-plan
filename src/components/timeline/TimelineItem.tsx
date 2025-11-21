@@ -1,12 +1,12 @@
 import { useState, useRef, useEffect } from 'react'
 import { parseISO, differenceInDays, addDays, format, startOfWeek, startOfMonth, differenceInMonths } from 'date-fns'
 import type { TimelineItem as TimelineItemType, ViewMode } from '../../types'
-import { getPixelsPerUnit } from '../../lib/utils'
 
 interface TimelineItemProps {
   item: TimelineItemType
   baseDate: Date
   viewMode: ViewMode
+  pixelsPerUnit: number
   rowHeight: number
   rowIndex: number
   rowTop: number
@@ -21,6 +21,7 @@ export default function TimelineItem({
   item,
   baseDate,
   viewMode,
+  pixelsPerUnit,
   rowHeight,
   rowIndex,
   rowTop,
@@ -36,8 +37,6 @@ export default function TimelineItem({
   const [isResizing, setIsResizing] = useState<'left' | 'right' | null>(null)
   const itemRef = useRef<HTMLDivElement>(null)
   const dragStartRef = useRef({ x: 0, y: 0, startDate: '', endDate: '', rowIndex: 0 })
-
-  const pixelsPerUnit = getPixelsPerUnit(viewMode)
 
   const startDate = parseISO(item.startDate)
   const endDate = parseISO(item.endDate)
