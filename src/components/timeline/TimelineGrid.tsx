@@ -44,7 +44,7 @@ export default function TimelineGrid({
     // Only zoom on vertical scroll (deltaY), let horizontal scroll work normally
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
       e.preventDefault()
-      const zoomFactor = e.deltaY > 0 ? 0.95 : 1.05
+      const zoomFactor = e.deltaY > 0 ? 0.98 : 1.02
       setZoomScale(prev => Math.max(0.2, Math.min(5, prev * zoomFactor)))
     }
   }
