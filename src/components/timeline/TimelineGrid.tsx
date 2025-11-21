@@ -36,7 +36,8 @@ export default function TimelineGrid({
 
   const basePixelsPerUnit = getPixelsPerUnit(viewMode)
   const pixelsPerUnit = basePixelsPerUnit * zoomScale
-  const totalUnits = viewMode === 'month' ? 24 : viewMode === 'week' ? 52 : 365
+  // 3 years worth of units
+  const totalUnits = viewMode === 'month' ? 36 : viewMode === 'week' ? 156 : 1095
   const totalWidth = totalUnits * pixelsPerUnit
   const rowHeight = 60
 
@@ -44,13 +45,14 @@ export default function TimelineGrid({
     // Only zoom on vertical scroll (deltaY), let horizontal scroll work normally
     if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
       e.preventDefault()
-      const zoomFactor = e.deltaY > 0 ? 0.98 : 1.02
+      const zoomFactor = e.deltaY > 0 ? 0.99 : 1.01
       setZoomScale(prev => Math.max(0.2, Math.min(5, prev * zoomFactor)))
     }
   }
 
   const getTimeMarkers = () => {
-    const endDate = addDays(baseDate, viewMode === 'month' ? 730 : viewMode === 'week' ? 364 : 365)
+    // 3 years worth of markers
+    const endDate = addDays(baseDate, viewMode === 'month' ? 1095 : viewMode === 'week' ? 1092 : 1095)
 
     switch (viewMode) {
       case 'day':
