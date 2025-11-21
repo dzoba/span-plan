@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../hooks/useAuth'
 import { useUserTimelines, useTimeline } from '../hooks/useTimeline'
+import { useTheme } from '../hooks/useTheme'
 import { formatDate } from '../lib/utils'
 
 export default function AccountPage() {
@@ -9,6 +10,7 @@ export default function AccountPage() {
   const { user, loading: authLoading, signInWithEmail, signUpWithEmail, signInWithGoogle, signOut } = useAuth()
   const { timelines, loading: timelinesLoading } = useUserTimelines(user?.uid || null)
   const { createTimeline } = useTimeline(undefined)
+  const { theme, toggleTheme } = useTheme()
 
   const [isSignUp, setIsSignUp] = useState(false)
   const [email, setEmail] = useState('')
@@ -50,8 +52,8 @@ export default function AccountPage() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-gray-500">Loading...</div>
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900">
+        <div className="text-gray-500 dark:text-gray-400">Loading...</div>
       </div>
     )
   }
@@ -59,50 +61,65 @@ export default function AccountPage() {
   // Not logged in - show auth form
   if (!user) {
     return (
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
         <header className="px-6 py-4">
-          <div className="max-w-6xl mx-auto">
-            <Link to="/" className="text-2xl font-bold text-gray-900">
+          <div className="max-w-6xl mx-auto flex items-center justify-between">
+            <Link to="/" className="text-2xl font-bold text-gray-900 dark:text-white">
               SpanPlan
             </Link>
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              )}
+            </button>
           </div>
         </header>
 
         <main className="px-6 py-12">
           <div className="max-w-md mx-auto">
-            <h2 className="text-2xl font-bold text-gray-900 text-center mb-8">
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-8">
               {isSignUp ? 'Create Account' : 'Sign In'}
             </h2>
 
             {error && (
-              <div className="mb-4 p-3 bg-red-50 text-red-600 text-sm rounded-md">
+              <div className="mb-4 p-3 bg-red-50 dark:bg-red-900/30 text-red-600 dark:text-red-400 text-sm rounded-md">
                 {error}
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Email
                 </label>
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                   required
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
+                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
                   Password
                 </label>
                 <input
                   type="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
                   required
                   minLength={6}
                 />
@@ -119,16 +136,16 @@ export default function AccountPage() {
 
             <div className="mt-4 relative">
               <div className="absolute inset-0 flex items-center">
-                <div className="w-full border-t border-gray-300" />
+                <div className="w-full border-t border-gray-300 dark:border-gray-600" />
               </div>
               <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-gray-50 text-gray-500">Or</span>
+                <span className="px-2 bg-gray-50 dark:bg-gray-900 text-gray-500 dark:text-gray-400">Or</span>
               </div>
             </div>
 
             <button
               onClick={handleGoogleSignIn}
-              className="mt-4 w-full py-2 border border-gray-300 text-gray-700 font-medium rounded-md hover:bg-gray-50 transition-colors flex items-center justify-center gap-2"
+              className="mt-4 w-full py-2 border border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 font-medium rounded-md hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors flex items-center justify-center gap-2"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path
@@ -151,14 +168,14 @@ export default function AccountPage() {
               Continue with Google
             </button>
 
-            <p className="mt-6 text-center text-sm text-gray-600">
+            <p className="mt-6 text-center text-sm text-gray-600 dark:text-gray-400">
               {isSignUp ? 'Already have an account?' : "Don't have an account?"}{' '}
               <button
                 onClick={() => {
                   setIsSignUp(!isSignUp)
                   setError('')
                 }}
-                className="text-blue-600 hover:text-blue-700 font-medium"
+                className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
               >
                 {isSignUp ? 'Sign in' : 'Sign up'}
               </button>
@@ -171,17 +188,32 @@ export default function AccountPage() {
 
   // Logged in - show user's timelines
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="px-6 py-4 bg-white border-b border-gray-200">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <header className="px-6 py-4 bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          <Link to="/" className="text-2xl font-bold text-gray-900">
+          <Link to="/" className="text-2xl font-bold text-gray-900 dark:text-white">
             SpanPlan
           </Link>
           <div className="flex items-center gap-4">
-            <span className="text-sm text-gray-600">{user.email}</span>
+            <button
+              onClick={toggleTheme}
+              className="p-2 text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+              aria-label="Toggle theme"
+            >
+              {theme === 'light' ? (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                </svg>
+              ) : (
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                </svg>
+              )}
+            </button>
+            <span className="text-sm text-gray-600 dark:text-gray-400">{user.email}</span>
             <button
               onClick={signOut}
-              className="text-sm text-gray-500 hover:text-gray-700"
+              className="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
             >
               Sign out
             </button>
@@ -192,7 +224,7 @@ export default function AccountPage() {
       <main className="px-6 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold text-gray-900">My Timelines</h2>
+            <h2 className="text-2xl font-bold text-gray-900 dark:text-white">My Timelines</h2>
             <button
               onClick={handleCreateNew}
               className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors"
@@ -202,13 +234,13 @@ export default function AccountPage() {
           </div>
 
           {timelinesLoading ? (
-            <div className="text-gray-500">Loading your timelines...</div>
+            <div className="text-gray-500 dark:text-gray-400">Loading your timelines...</div>
           ) : timelines.length === 0 ? (
-            <div className="text-center py-12 bg-white rounded-lg border border-gray-200">
-              <p className="text-gray-500 mb-4">You haven't created any timelines yet.</p>
+            <div className="text-center py-12 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+              <p className="text-gray-500 dark:text-gray-400 mb-4">You haven't created any timelines yet.</p>
               <button
                 onClick={handleCreateNew}
-                className="text-blue-600 hover:text-blue-700 font-medium"
+                className="text-blue-600 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300 font-medium"
               >
                 Create your first timeline
               </button>
@@ -219,18 +251,18 @@ export default function AccountPage() {
                 <Link
                   key={timeline.id}
                   to={`/timeline/${timeline.id}`}
-                  className="block p-4 bg-white rounded-lg border border-gray-200 hover:border-gray-300 transition-colors"
+                  className="block p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-gray-300 dark:hover:border-gray-600 transition-colors"
                 >
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="font-medium text-gray-900">
+                      <p className="font-medium text-gray-900 dark:text-white">
                         Timeline {timeline.id.slice(0, 8)}
                       </p>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
                         {timeline.items.length} items, {timeline.rows.length} rows
                       </p>
                     </div>
-                    <p className="text-sm text-gray-400">
+                    <p className="text-sm text-gray-400 dark:text-gray-500">
                       Created {formatDate(timeline.createdAt)}
                     </p>
                   </div>

@@ -1,11 +1,11 @@
 export interface TimelineItem {
   id: string
-  rowId: string
+  rowId: string | null // null for backlog items
   title: string
   subtitle: string
   color: string
-  startDate: string // ISO date string
-  endDate: string // ISO date string
+  startDate: string | null // null for backlog items
+  endDate: string | null // null for backlog items
 }
 
 export interface TimelineRow {

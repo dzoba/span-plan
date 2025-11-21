@@ -37,8 +37,12 @@ export default function TimelineItem({
   const [isResizing, setIsResizing] = useState<'left' | 'right' | null>(null)
   const [isHovered, setIsHovered] = useState(false)
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
+  const [hasDragged, setHasDragged] = useState(false)
   const itemRef = useRef<HTMLDivElement>(null)
   const dragStartRef = useRef({ x: 0, y: 0, startDate: '', endDate: '', rowIndex: 0 })
+
+  // Guard against null dates (shouldn't happen for scheduled items, but TypeScript needs this)
+  if (!item.startDate || !item.endDate) return null
 
   const startDate = parseISO(item.startDate)
   const endDate = parseISO(item.endDate)
@@ -86,10 +90,12 @@ export default function TimelineItem({
     dragStartRef.current = {
       x: e.clientX,
       y: e.clientY,
-      startDate: item.startDate,
-      endDate: item.endDate,
+      startDate: item.startDate!,
+      endDate: item.endDate!,
       rowIndex: rowIndex
     }
+
+    setHasDragged(false)
 
     if (type === 'drag') {
       setIsDragging(true)
@@ -105,6 +111,13 @@ export default function TimelineItem({
 
     const handleMouseMove = (e: MouseEvent) => {
       const deltaX = e.clientX - dragStartRef.current.x
+      const deltaY = e.clientY - dragStartRef.current.y
+
+      // Mark as dragged if moved more than 3 pixels
+      if (Math.abs(deltaX) > 3 || Math.abs(deltaY) > 3) {
+        setHasDragged(true)
+      }
+
       let deltaDays: number
 
       switch (viewMode) {
@@ -186,11 +199,13 @@ export default function TimelineItem({
         cursor: isDragging ? 'grabbing' : 'grab'
       }}
       className={`rounded-md shadow-sm flex items-center px-2 group ${
-        isSelected ? 'ring-2 ring-blue-500 ring-offset-1' : ''
+        isSelected ? 'ring-2 ring-blue-500 ring-offset-1 dark:ring-offset-gray-800' : ''
       }`}
       onClick={(e) => {
         e.stopPropagation()
-        onSelect(item)
+        if (!hasDragged) {
+          onSelect(item)
+        }
       }}
       onDoubleClick={(e) => {
         e.stopPropagation()

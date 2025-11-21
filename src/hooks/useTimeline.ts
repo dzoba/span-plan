@@ -46,12 +46,26 @@ export function useTimeline(timelineId: string | undefined) {
 
   const createTimeline = useCallback(async (ownerId: string | null): Promise<string> => {
     const id = generateId()
+    const rows = getDefaultRows()
+    const today = new Date()
+
+    // Create a default item to help users get started
+    const defaultItem: TimelineItem = {
+      id: generateId(),
+      rowId: rows[0].id,
+      title: 'My first item',
+      subtitle: 'Double-click anywhere to add more',
+      color: getRandomColor(),
+      startDate: format(today, 'yyyy-MM-dd'),
+      endDate: format(addDays(today, 7), 'yyyy-MM-dd')
+    }
+
     const newTimeline: Timeline = {
       id,
       ownerId,
       createdAt: new Date().toISOString(),
-      rows: getDefaultRows(),
-      items: []
+      rows,
+      items: [defaultItem]
     }
 
     await setDoc(doc(db, 'timelines', id), newTimeline)
@@ -74,6 +88,24 @@ export function useTimeline(timelineId: string | undefined) {
       color: getRandomColor(),
       startDate: format(startDate, 'yyyy-MM-dd'),
       endDate: format(addDays(startDate, 7), 'yyyy-MM-dd')
+    }
+
+    await updateTimeline({
+      items: [...timeline.items, newItem]
+    })
+  }, [timeline, updateTimeline])
+
+  const addBacklogItem = useCallback(async (title: string = 'Untitled') => {
+    if (!timeline) return
+
+    const newItem: TimelineItem = {
+      id: generateId(),
+      rowId: null,
+      title,
+      subtitle: '',
+      color: getRandomColor(),
+      startDate: null,
+      endDate: null
     }
 
     await updateTimeline({
@@ -140,6 +172,7 @@ export function useTimeline(timelineId: string | undefined) {
     error,
     createTimeline,
     addItem,
+    addBacklogItem,
     updateItem,
     deleteItem,
     addRow,
