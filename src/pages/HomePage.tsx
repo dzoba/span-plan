@@ -134,139 +134,151 @@ export default function HomePage() {
           </div>
         </div>
 
-        {/* Keyboard Shortcuts */}
-        <div className="max-w-3xl mx-auto mt-24">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-4">
-            Built for Power Users
-          </h3>
-          <p className="text-center text-gray-600 dark:text-gray-400 mb-8">
-            Keyboard shortcuts for everything you need
-          </p>
-          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
-            <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-gray-700">
-              <div className="p-6 text-center">
-                <div className="flex items-center justify-center gap-1 mb-3">
-                  <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
-                    {navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}
-                  </kbd>
-                  <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
-                    K
-                  </kbd>
-                </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Search & jump to any item</p>
-              </div>
-              <div className="p-6 text-center">
-                <div className="flex items-center justify-center gap-1 mb-3">
-                  <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
-                    {navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}
-                  </kbd>
-                  <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
-                    B
-                  </kbd>
-                </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Toggle backlog panel</p>
-              </div>
-              <div className="p-6 text-center">
-                <div className="flex items-center justify-center gap-1 mb-3">
-                  <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
-                    Esc
-                  </kbd>
-                </div>
-                <p className="text-sm text-gray-600 dark:text-gray-400">Close panels</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Use Cases */}
-        <div className="max-w-4xl mx-auto mt-24">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-10">
-            Perfect For
-          </h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Project Roadmaps</h4>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Plan sprints, milestones, and deliverables. Keep your team aligned on what's coming next.
-              </p>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Event Planning</h4>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Coordinate schedules, track deadlines, and manage multiple workstreams for launches and events.
-              </p>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Team Coordination</h4>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Visualize who's working on what and when. Spot conflicts and dependencies at a glance.
-              </p>
-            </div>
-            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
-              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Quick Brainstorms</h4>
-              <p className="text-gray-600 dark:text-gray-400 text-sm">
-                Sketch out ideas with your team in real-time. No setup means you can start planning immediately.
-              </p>
-            </div>
-          </div>
-        </div>
-
-        {/* How it works */}
-        <div className="max-w-3xl mx-auto mt-24">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-10">
-            Get Started in Seconds
-          </h3>
-          <div className="space-y-6">
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-medium">
-                1
-              </div>
-              <div>
-                <h4 className="font-medium text-gray-900 dark:text-white">Create a timeline</h4>
-                <p className="text-gray-600 dark:text-gray-400">Click the button above. Your timeline is ready instantly.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-medium">
-                2
-              </div>
-              <div>
-                <h4 className="font-medium text-gray-900 dark:text-white">Add your items</h4>
-                <p className="text-gray-600 dark:text-gray-400">Double-click to add items. Drag to move them. Resize edges to adjust duration.</p>
-              </div>
-            </div>
-            <div className="flex items-start gap-4">
-              <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-medium">
-                3
-              </div>
-              <div>
-                <h4 className="font-medium text-gray-900 dark:text-white">Share the link</h4>
-                <p className="text-gray-600 dark:text-gray-400">Copy the URL. Anyone with the link can view and edit in real-time.</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* CTA */}
-        <div className="max-w-2xl mx-auto mt-24 text-center">
-          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-            Ready to plan?
-          </h3>
-          <p className="text-gray-600 dark:text-gray-400 mb-8">
-            Create your first timeline and see why teams love SpanPlan.
-          </p>
-          <button
-            onClick={handleCreate}
-            disabled={isCreating}
-            className="px-8 py-4 bg-blue-600 text-white text-lg font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors shadow-lg hover:shadow-xl"
-          >
-            {isCreating ? 'Creating...' : 'Create Timeline'}
-          </button>
-        </div>
       </main>
 
+        {/* Keyboard Shortcuts - Blue tinted background */}
+        <section className="bg-blue-50 dark:bg-blue-950/30 py-20 px-6">
+          <div className="max-w-3xl mx-auto">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-4">
+              Built for Power Users
+            </h3>
+            <p className="text-center text-gray-600 dark:text-gray-400 mb-8">
+              Keyboard shortcuts for everything you need
+            </p>
+            <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+              <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-gray-700">
+                <div className="p-6 text-center">
+                  <div className="flex items-center justify-center gap-1 mb-3">
+                    <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
+                      {navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}
+                    </kbd>
+                    <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
+                      K
+                    </kbd>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Search & jump to any item</p>
+                </div>
+                <div className="p-6 text-center">
+                  <div className="flex items-center justify-center gap-1 mb-3">
+                    <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
+                      {navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}
+                    </kbd>
+                    <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
+                      B
+                    </kbd>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Toggle backlog panel</p>
+                </div>
+                <div className="p-6 text-center">
+                  <div className="flex items-center justify-center gap-1 mb-3">
+                    <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
+                      Esc
+                    </kbd>
+                  </div>
+                  <p className="text-sm text-gray-600 dark:text-gray-400">Close panels</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Use Cases - Green tinted background */}
+        <section className="bg-green-50 dark:bg-green-950/30 py-20 px-6">
+          <div className="max-w-4xl mx-auto">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-10">
+              Perfect For
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Project Roadmaps</h4>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                  Plan sprints, milestones, and deliverables. Keep your team aligned on what's coming next.
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Event Planning</h4>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                  Coordinate schedules, track deadlines, and manage multiple workstreams for launches and events.
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Team Coordination</h4>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                  Visualize who's working on what and when. Spot conflicts and dependencies at a glance.
+                </p>
+              </div>
+              <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+                <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Quick Brainstorms</h4>
+                <p className="text-gray-600 dark:text-gray-400 text-sm">
+                  Sketch out ideas with your team in real-time. No setup means you can start planning immediately.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* How it works - Purple tinted background */}
+        <section className="bg-purple-50 dark:bg-purple-950/30 py-20 px-6">
+          <div className="max-w-3xl mx-auto">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-10">
+              Get Started in Seconds
+            </h3>
+            <div className="space-y-6">
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-medium">
+                  1
+                </div>
+                <div>
+                  <h4 className="font-medium text-gray-900 dark:text-white">Create a timeline</h4>
+                  <p className="text-gray-600 dark:text-gray-400">Click the button above. Your timeline is ready instantly.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-medium">
+                  2
+                </div>
+                <div>
+                  <h4 className="font-medium text-gray-900 dark:text-white">Add your items</h4>
+                  <p className="text-gray-600 dark:text-gray-400">Double-click to add items. Drag to move them. Resize edges to adjust duration.</p>
+                </div>
+              </div>
+              <div className="flex items-start gap-4">
+                <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-medium">
+                  3
+                </div>
+                <div>
+                  <h4 className="font-medium text-gray-900 dark:text-white">Share the link</h4>
+                  <p className="text-gray-600 dark:text-gray-400">Copy the URL. Anyone with the link can view and edit in real-time.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA - Amber tinted background */}
+        <section className="bg-amber-50 dark:bg-amber-950/30 py-20 px-6">
+          <div className="max-w-2xl mx-auto text-center">
+            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+              Ready to plan?
+            </h3>
+            <p className="text-gray-600 dark:text-gray-400 mb-6">
+              Create your first timeline and see why teams love SpanPlan.
+            </p>
+            <button
+              onClick={handleCreate}
+              disabled={isCreating}
+              className="px-8 py-4 bg-blue-600 text-white text-lg font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors shadow-lg hover:shadow-xl"
+            >
+              {isCreating ? 'Creating...' : 'Create Timeline'}
+            </button>
+            <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+              100% free. No sign-up required.
+            </p>
+          </div>
+        </section>
+
       {/* Footer */}
-      <footer className="px-6 py-8 mt-20 border-t border-gray-200 dark:border-gray-700">
+      <footer className="px-6 py-8 border-t border-gray-200 dark:border-gray-700">
         <div className="max-w-6xl mx-auto text-center text-sm text-gray-500 dark:text-gray-400">
           <p>SpanPlan - Collaborative timeline planning that just works</p>
           <p className="mt-2">

@@ -41,13 +41,12 @@ export default function TimelineItem({
   const itemRef = useRef<HTMLDivElement>(null)
   const dragStartRef = useRef({ x: 0, y: 0, startDate: '', endDate: '', rowIndex: 0 })
 
-  // Guard against null dates (shouldn't happen for scheduled items, but TypeScript needs this)
-  if (!item.startDate || !item.endDate) return null
-
-  const startDate = parseISO(item.startDate)
-  const endDate = parseISO(item.endDate)
+  // Parse dates safely (may be null for backlog items)
+  const startDate = item.startDate ? parseISO(item.startDate) : null
+  const endDate = item.endDate ? parseISO(item.endDate) : null
 
   const getPosition = () => {
+    if (!startDate) return 0
     switch (viewMode) {
       case 'day':
         return differenceInDays(startDate, baseDate) * pixelsPerUnit
@@ -69,6 +68,7 @@ export default function TimelineItem({
   }
 
   const getWidth = () => {
+    if (!startDate || !endDate) return 0
     const duration = differenceInDays(endDate, startDate)
     switch (viewMode) {
       case 'day':
@@ -180,6 +180,10 @@ export default function TimelineItem({
       document.removeEventListener('mouseup', handleMouseUp)
     }
   }, [isDragging, isResizing, item.id, onUpdate, pixelsPerUnit, viewMode, rowHeight, allRowIds])
+
+  // Guard against null dates (shouldn't happen for scheduled items, but TypeScript needs this)
+  // This must come after all hooks to satisfy rules-of-hooks
+  if (!item.startDate || !item.endDate) return null
 
   const handleTitleSubmit = () => {
     onUpdate(item.id, { title: titleValue || 'Untitled' })

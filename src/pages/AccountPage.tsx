@@ -29,8 +29,8 @@ export default function AccountPage() {
       } else {
         await signInWithEmail(email, password)
       }
-    } catch (err: any) {
-      setError(err.message || 'Authentication failed')
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Authentication failed')
     } finally {
       setIsSubmitting(false)
     }
@@ -40,8 +40,8 @@ export default function AccountPage() {
     setError('')
     try {
       await signInWithGoogle()
-    } catch (err: any) {
-      setError(err.message || 'Google sign-in failed')
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Google sign-in failed')
     }
   }
 
