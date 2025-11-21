@@ -65,74 +65,156 @@ export default function HomePage() {
       </header>
 
       {/* Hero */}
-      <main className="px-6 py-20">
+      <main className="px-6 py-16">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-5xl font-bold text-gray-900 dark:text-white mb-6">
-            Collaborative Timeline Planning
+            Timeline Planning That Just Works
           </h2>
-          <p className="text-xl text-gray-600 dark:text-gray-300 mb-10 max-w-2xl mx-auto">
-            Create beautiful timelines for projects, events, or roadmaps.
-            Share with anyone using a simple link. No account required.
+          <p className="text-xl text-gray-600 dark:text-gray-300 mb-4 max-w-2xl mx-auto">
+            No accounts. No invites. No waiting.
+          </p>
+          <p className="text-lg text-gray-500 dark:text-gray-400 mb-10 max-w-2xl mx-auto">
+            Create a timeline, share the URL, and start collaborating instantly.
+            Changes sync in real-time for everyone.
           </p>
           <button
             onClick={handleCreate}
             disabled={isCreating}
-            className="px-8 py-4 bg-blue-600 text-white text-lg font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors"
+            className="px-8 py-4 bg-blue-600 text-white text-lg font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors shadow-lg hover:shadow-xl"
           >
-            {isCreating ? 'Creating...' : 'Create New Timeline'}
+            {isCreating ? 'Creating...' : 'Create Timeline - It\'s Free'}
           </button>
+          <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+            No sign-up required. Your timeline is ready in seconds.
+          </p>
         </div>
 
-        {/* Features */}
+        {/* Core Features */}
         <div className="max-w-5xl mx-auto mt-24 grid md:grid-cols-3 gap-8">
           <div className="text-center p-6">
             <div className="w-12 h-12 bg-blue-100 dark:bg-blue-900/30 rounded-lg mx-auto mb-4 flex items-center justify-center">
               <svg className="w-6 h-6 text-blue-600 dark:text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
               </svg>
             </div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Drag & Drop
+              Instant Collaboration
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
-              Easily move and resize items on your timeline. Click to edit titles instantly.
+              Share a link and your team can edit immediately. No accounts, invites, or setup required.
             </p>
           </div>
 
           <div className="text-center p-6">
             <div className="w-12 h-12 bg-green-100 dark:bg-green-900/30 rounded-lg mx-auto mb-4 flex items-center justify-center">
               <svg className="w-6 h-6 text-green-600 dark:text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
               </svg>
             </div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Real-time Collaboration
+              Drag & Drop Everything
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
-              Share a link and collaborate in real-time. Everyone sees changes instantly.
+              Move items across rows, resize durations, and organize your timeline with intuitive controls.
             </p>
           </div>
 
           <div className="text-center p-6">
             <div className="w-12 h-12 bg-purple-100 dark:bg-purple-900/30 rounded-lg mx-auto mb-4 flex items-center justify-center">
               <svg className="w-6 h-6 text-purple-600 dark:text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
             </div>
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
-              Multiple Views
+              Backlog Management
             </h3>
             <p className="text-gray-600 dark:text-gray-400">
-              Switch between day, week, and month views. Perfect for any planning scale.
+              Keep unscheduled items in a backlog. Drag them onto the timeline when you're ready to commit.
             </p>
+          </div>
+        </div>
+
+        {/* Keyboard Shortcuts */}
+        <div className="max-w-3xl mx-auto mt-24">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-4">
+            Built for Power Users
+          </h3>
+          <p className="text-center text-gray-600 dark:text-gray-400 mb-8">
+            Keyboard shortcuts for everything you need
+          </p>
+          <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 overflow-hidden">
+            <div className="grid md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-gray-200 dark:divide-gray-700">
+              <div className="p-6 text-center">
+                <div className="flex items-center justify-center gap-1 mb-3">
+                  <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
+                    {navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}
+                  </kbd>
+                  <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
+                    K
+                  </kbd>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Search & jump to any item</p>
+              </div>
+              <div className="p-6 text-center">
+                <div className="flex items-center justify-center gap-1 mb-3">
+                  <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
+                    {navigator.platform.includes('Mac') ? '⌘' : 'Ctrl'}
+                  </kbd>
+                  <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
+                    B
+                  </kbd>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Toggle backlog panel</p>
+              </div>
+              <div className="p-6 text-center">
+                <div className="flex items-center justify-center gap-1 mb-3">
+                  <kbd className="px-2 py-1 text-sm font-sans bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded">
+                    Esc
+                  </kbd>
+                </div>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Close panels</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Use Cases */}
+        <div className="max-w-4xl mx-auto mt-24">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-10">
+            Perfect For
+          </h3>
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Project Roadmaps</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Plan sprints, milestones, and deliverables. Keep your team aligned on what's coming next.
+              </p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Event Planning</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Coordinate schedules, track deadlines, and manage multiple workstreams for launches and events.
+              </p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Team Coordination</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Visualize who's working on what and when. Spot conflicts and dependencies at a glance.
+              </p>
+            </div>
+            <div className="bg-white dark:bg-gray-800 rounded-lg p-6 border border-gray-200 dark:border-gray-700">
+              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">Quick Brainstorms</h4>
+              <p className="text-gray-600 dark:text-gray-400 text-sm">
+                Sketch out ideas with your team in real-time. No setup means you can start planning immediately.
+              </p>
+            </div>
           </div>
         </div>
 
         {/* How it works */}
         <div className="max-w-3xl mx-auto mt-24">
           <h3 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-10">
-            How it works
+            Get Started in Seconds
           </h3>
           <div className="space-y-6">
             <div className="flex items-start gap-4">
@@ -141,7 +223,7 @@ export default function HomePage() {
               </div>
               <div>
                 <h4 className="font-medium text-gray-900 dark:text-white">Create a timeline</h4>
-                <p className="text-gray-600 dark:text-gray-400">Click the button above to create a new timeline. No sign-up required.</p>
+                <p className="text-gray-600 dark:text-gray-400">Click the button above. Your timeline is ready instantly.</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
@@ -149,8 +231,8 @@ export default function HomePage() {
                 2
               </div>
               <div>
-                <h4 className="font-medium text-gray-900 dark:text-white">Add items to rows</h4>
-                <p className="text-gray-600 dark:text-gray-400">Double-click on any row to add an item. Drag to move, resize edges to adjust duration.</p>
+                <h4 className="font-medium text-gray-900 dark:text-white">Add your items</h4>
+                <p className="text-gray-600 dark:text-gray-400">Double-click to add items. Drag to move them. Resize edges to adjust duration.</p>
               </div>
             </div>
             <div className="flex items-start gap-4">
@@ -159,17 +241,37 @@ export default function HomePage() {
               </div>
               <div>
                 <h4 className="font-medium text-gray-900 dark:text-white">Share the link</h4>
-                <p className="text-gray-600 dark:text-gray-400">Copy the URL and share it with your team. They can view and edit in real-time.</p>
+                <p className="text-gray-600 dark:text-gray-400">Copy the URL. Anyone with the link can view and edit in real-time.</p>
               </div>
             </div>
           </div>
+        </div>
+
+        {/* CTA */}
+        <div className="max-w-2xl mx-auto mt-24 text-center">
+          <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            Ready to plan?
+          </h3>
+          <p className="text-gray-600 dark:text-gray-400 mb-8">
+            Create your first timeline and see why teams love SpanPlan.
+          </p>
+          <button
+            onClick={handleCreate}
+            disabled={isCreating}
+            className="px-8 py-4 bg-blue-600 text-white text-lg font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors shadow-lg hover:shadow-xl"
+          >
+            {isCreating ? 'Creating...' : 'Create Timeline'}
+          </button>
         </div>
       </main>
 
       {/* Footer */}
       <footer className="px-6 py-8 mt-20 border-t border-gray-200 dark:border-gray-700">
         <div className="max-w-6xl mx-auto text-center text-sm text-gray-500 dark:text-gray-400">
-          SpanPlan - Simple collaborative timeline planning
+          <p>SpanPlan - Collaborative timeline planning that just works</p>
+          <p className="mt-2">
+            <a href="https://span-plan.com" className="hover:text-gray-700 dark:hover:text-gray-300">span-plan.com</a>
+          </p>
         </div>
       </footer>
     </div>
