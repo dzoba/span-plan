@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react'
-import { parseISO, differenceInDays, addDays, format } from 'date-fns'
+import { parseISO, differenceInDays, addDays, format, startOfWeek, startOfMonth, differenceInMonths } from 'date-fns'
 import type { TimelineItem as TimelineItemType, ViewMode } from '../../types'
 import { getPixelsPerUnit } from '../../lib/utils'
 
@@ -41,17 +41,23 @@ export default function TimelineItem({
   const endDate = parseISO(item.endDate)
 
   const getPosition = () => {
-    const daysDiff = differenceInDays(startDate, baseDate)
     switch (viewMode) {
       case 'day':
-        return daysDiff * pixelsPerUnit
-      case 'week':
+        return differenceInDays(startDate, baseDate) * pixelsPerUnit
+      case 'week': {
+        // Calculate position relative to start of week containing baseDate
+        const weekStart = startOfWeek(baseDate, { weekStartsOn: 0 })
+        const daysDiff = differenceInDays(startDate, weekStart)
         return (daysDiff / 7) * pixelsPerUnit
-      case 'month':
-        const monthsDiff = (startDate.getFullYear() - baseDate.getFullYear()) * 12 +
-          (startDate.getMonth() - baseDate.getMonth()) +
-          (startDate.getDate() / 30)
-        return monthsDiff * pixelsPerUnit
+      }
+      case 'month': {
+        // Calculate position relative to start of month containing baseDate
+        const monthStart = startOfMonth(baseDate)
+        const monthsDiff = differenceInMonths(startDate, monthStart)
+        const dayOfMonth = startDate.getDate() - 1
+        const daysInMonth = new Date(startDate.getFullYear(), startDate.getMonth() + 1, 0).getDate()
+        return (monthsDiff + dayOfMonth / daysInMonth) * pixelsPerUnit
+      }
     }
   }
 
