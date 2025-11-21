@@ -1,6 +1,7 @@
 import { useRef, useState } from 'react'
 import { addDays, startOfDay, format, eachDayOfInterval, eachWeekOfInterval, eachMonthOfInterval } from 'date-fns'
 import TimelineRow from './TimelineRow'
+import TimelineItem from './TimelineItem'
 import type { Timeline, TimelineItem as TimelineItemType, ViewMode } from '../../types'
 import { getPixelsPerUnit } from '../../lib/utils'
 
@@ -113,27 +114,44 @@ export default function TimelineGrid({
             </div>
           </div>
 
-          {/* Rows */}
-          {timeline.rows.sort((a, b) => a.order - b.order).map((row, index) => (
-            <TimelineRow
-              key={row.id}
-              row={row}
-              items={timeline.items.filter(item => item.rowId === row.id)}
-              rowHeight={rowHeight}
-              totalWidth={totalWidth}
-              baseDate={baseDate}
-              viewMode={viewMode}
-              onUpdateRow={onUpdateRow}
-              onDeleteRow={onDeleteRow}
-              onDoubleClick={(e) => handleRowDoubleClick(row.id, e)}
-              onUpdateItem={onUpdateItem}
-              onDeleteItem={onDeleteItem}
-              onSelectItem={onSelectItem}
-              selectedItemId={selectedItemId}
-              allRowIds={timeline.rows.sort((a, b) => a.order - b.order).map(r => r.id)}
-              rowIndex={index}
-            />
-          ))}
+          {/* Rows and Items container */}
+          <div className="relative">
+            {/* Rows */}
+            {timeline.rows.sort((a, b) => a.order - b.order).map((row) => (
+              <TimelineRow
+                key={row.id}
+                row={row}
+                rowHeight={rowHeight}
+                totalWidth={totalWidth}
+                onUpdateRow={onUpdateRow}
+                onDeleteRow={onDeleteRow}
+                onDoubleClick={(e) => handleRowDoubleClick(row.id, e)}
+                hasItems={timeline.items.some(item => item.rowId === row.id)}
+              />
+            ))}
+
+            {/* Items rendered at grid level for smooth cross-row dragging */}
+            {timeline.items.map((item) => {
+              const sortedRows = timeline.rows.sort((a, b) => a.order - b.order)
+              const rowIndex = sortedRows.findIndex(r => r.id === item.rowId)
+              return (
+                <TimelineItem
+                  key={item.id}
+                  item={item}
+                  baseDate={baseDate}
+                  viewMode={viewMode}
+                  rowHeight={rowHeight}
+                  rowIndex={rowIndex}
+                  rowTop={rowIndex * rowHeight}
+                  onUpdate={onUpdateItem}
+                  onDelete={onDeleteItem}
+                  onSelect={onSelectItem}
+                  isSelected={selectedItemId === item.id}
+                  allRowIds={sortedRows.map(r => r.id)}
+                />
+              )
+            })}
+          </div>
 
           {/* Add row button */}
           <div className="flex border-t border-gray-200">

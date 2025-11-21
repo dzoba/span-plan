@@ -1,41 +1,24 @@
 import { useState } from 'react'
-import TimelineItem from './TimelineItem'
-import type { TimelineRow as TimelineRowType, TimelineItem as TimelineItemType, ViewMode } from '../../types'
+import type { TimelineRow as TimelineRowType } from '../../types'
 
 interface TimelineRowProps {
   row: TimelineRowType
-  items: TimelineItemType[]
   rowHeight: number
   totalWidth: number
-  baseDate: Date
-  viewMode: ViewMode
   onUpdateRow: (rowId: string, updates: { name: string }) => void
   onDeleteRow: (rowId: string) => void
   onDoubleClick: (e: React.MouseEvent) => void
-  onUpdateItem: (itemId: string, updates: Partial<TimelineItemType>) => void
-  onDeleteItem: (itemId: string) => void
-  onSelectItem: (item: TimelineItemType | null) => void
-  selectedItemId: string | null
-  allRowIds: string[]
-  rowIndex: number
+  hasItems: boolean
 }
 
 export default function TimelineRow({
   row,
-  items,
   rowHeight,
   totalWidth,
-  baseDate,
-  viewMode,
   onUpdateRow,
   onDeleteRow,
   onDoubleClick,
-  onUpdateItem,
-  onDeleteItem,
-  onSelectItem,
-  selectedItemId,
-  allRowIds,
-  rowIndex
+  hasItems
 }: TimelineRowProps) {
   const [isEditing, setIsEditing] = useState(false)
   const [editValue, setEditValue] = useState(row.name)
@@ -96,26 +79,11 @@ export default function TimelineRow({
         onDoubleClick={onDoubleClick}
         title="Double-click to add item"
       >
-        {items.length === 0 && (
+        {!hasItems && (
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
             <span className="text-xs text-gray-300">Double-click to add item</span>
           </div>
         )}
-        {items.map((item) => (
-          <TimelineItem
-            key={item.id}
-            item={item}
-            baseDate={baseDate}
-            viewMode={viewMode}
-            rowHeight={rowHeight}
-            onUpdate={onUpdateItem}
-            onDelete={onDeleteItem}
-            onSelect={onSelectItem}
-            isSelected={selectedItemId === item.id}
-            allRowIds={allRowIds}
-            rowIndex={rowIndex}
-          />
-        ))}
       </div>
     </div>
   )

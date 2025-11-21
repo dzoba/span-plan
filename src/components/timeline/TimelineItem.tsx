@@ -8,12 +8,13 @@ interface TimelineItemProps {
   baseDate: Date
   viewMode: ViewMode
   rowHeight: number
+  rowIndex: number
+  rowTop: number
   onUpdate: (itemId: string, updates: Partial<TimelineItemType>) => void
   onDelete: (itemId: string) => void
   onSelect: (item: TimelineItemType | null) => void
   isSelected: boolean
   allRowIds: string[]
-  rowIndex: number
 }
 
 export default function TimelineItem({
@@ -21,12 +22,13 @@ export default function TimelineItem({
   baseDate,
   viewMode,
   rowHeight,
+  rowIndex,
+  rowTop,
   onUpdate,
   onDelete: _onDelete,
   onSelect,
   isSelected,
-  allRowIds,
-  rowIndex
+  allRowIds
 }: TimelineItemProps) {
   const [isEditingTitle, setIsEditingTitle] = useState(false)
   const [titleValue, setTitleValue] = useState(item.title)
@@ -175,10 +177,10 @@ export default function TimelineItem({
       ref={itemRef}
       style={{
         position: 'absolute',
-        left: position,
+        left: position + 150, // Add row label width offset
         width: width,
-        top: 4,
-        bottom: 4,
+        top: rowTop + 4,
+        height: rowHeight - 8,
         backgroundColor: item.color,
         cursor: isDragging ? 'grabbing' : 'grab'
       }}
