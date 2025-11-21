@@ -88,9 +88,15 @@ export default function TimelineRow({
       {/* Timeline area */}
       <div
         style={{ width: totalWidth, height: rowHeight }}
-        className="relative bg-white hover:bg-gray-50 transition-colors"
+        className="relative bg-white hover:bg-gray-50 transition-colors cursor-pointer"
         onDoubleClick={onDoubleClick}
+        title="Double-click to add item"
       >
+        {items.length === 0 && (
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+            <span className="text-xs text-gray-300">Double-click to add item</span>
+          </div>
+        )}
         {items.map((item) => (
           <TimelineItem
             key={item.id}
