@@ -136,8 +136,8 @@ export default function HomePage() {
 
       </main>
 
-        {/* Keyboard Shortcuts - Blue tinted background */}
-        <section className="bg-blue-50 dark:bg-blue-950/30 py-20 px-6">
+        {/* Keyboard Shortcuts - White background */}
+        <section className="bg-white dark:bg-gray-800 py-20 px-6">
           <div className="max-w-3xl mx-auto">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-4">
               Built for Power Users
@@ -182,8 +182,8 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* Use Cases - Green tinted background */}
-        <section className="bg-green-50 dark:bg-green-950/30 py-20 px-6">
+        {/* Use Cases - Light gray background */}
+        <section className="bg-gray-50 dark:bg-gray-900 py-20 px-6">
           <div className="max-w-4xl mx-auto">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-10">
               Perfect For
@@ -217,15 +217,15 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* How it works - Purple tinted background */}
-        <section className="bg-purple-50 dark:bg-purple-950/30 py-20 px-6">
+        {/* How it works - White background */}
+        <section className="bg-white dark:bg-gray-800 py-20 px-6">
           <div className="max-w-3xl mx-auto">
             <h3 className="text-2xl font-bold text-gray-900 dark:text-white text-center mb-10">
               Get Started in Seconds
             </h3>
             <div className="space-y-6">
               <div className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-medium">
+                <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-medium">
                   1
                 </div>
                 <div>
@@ -234,7 +234,7 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-medium">
+                <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-medium">
                   2
                 </div>
                 <div>
@@ -243,7 +243,7 @@ export default function HomePage() {
                 </div>
               </div>
               <div className="flex items-start gap-4">
-                <div className="w-8 h-8 bg-purple-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-medium">
+                <div className="w-8 h-8 bg-blue-600 text-white rounded-full flex items-center justify-center flex-shrink-0 text-sm font-medium">
                   3
                 </div>
                 <div>
@@ -255,23 +255,23 @@ export default function HomePage() {
           </div>
         </section>
 
-        {/* CTA - Amber tinted background */}
-        <section className="bg-amber-50 dark:bg-amber-950/30 py-20 px-6">
+        {/* CTA - Blue background */}
+        <section className="bg-blue-600 dark:bg-blue-700 py-20 px-6">
           <div className="max-w-2xl mx-auto text-center">
-            <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
+            <h3 className="text-2xl font-bold text-white mb-4">
               Ready to plan?
             </h3>
-            <p className="text-gray-600 dark:text-gray-400 mb-6">
+            <p className="text-blue-100 mb-6">
               Create your first timeline and see why teams love SpanPlan.
             </p>
             <button
               onClick={handleCreate}
               disabled={isCreating}
-              className="px-8 py-4 bg-blue-600 text-white text-lg font-medium rounded-lg hover:bg-blue-700 disabled:opacity-50 transition-colors shadow-lg hover:shadow-xl"
+              className="px-8 py-4 bg-white text-blue-600 text-lg font-medium rounded-lg hover:bg-gray-100 disabled:opacity-50 transition-colors shadow-lg hover:shadow-xl"
             >
               {isCreating ? 'Creating...' : 'Create Timeline'}
             </button>
-            <p className="mt-4 text-sm text-gray-500 dark:text-gray-400">
+            <p className="mt-4 text-sm text-blue-200">
               100% free. No sign-up required.
             </p>
           </div>
