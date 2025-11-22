@@ -39,6 +39,7 @@ export default function TimelineItem({
   const [tooltipPosition, setTooltipPosition] = useState({ x: 0, y: 0 })
   const [hasDragged, setHasDragged] = useState(false)
   const itemRef = useRef<HTMLDivElement>(null)
+  const titleInputRef = useRef<HTMLInputElement>(null)
   const dragStartRef = useRef({ x: 0, y: 0, startDate: '', endDate: '', rowIndex: 0 })
 
   // Parse dates safely (may be null for backlog items)
@@ -251,6 +252,7 @@ export default function TimelineItem({
       <div className="flex-1 min-w-0 px-1 flex flex-col justify-center">
         {isEditingTitle ? (
           <input
+            ref={titleInputRef}
             type="text"
             value={titleValue}
             onChange={(e) => setTitleValue(e.target.value)}
@@ -261,6 +263,11 @@ export default function TimelineItem({
                 setTitleValue(item.title)
                 setIsEditingTitle(false)
               }
+            }}
+            onFocus={(e) => e.target.select()}
+            onDoubleClick={(e) => {
+              e.stopPropagation()
+              ;(e.target as HTMLInputElement).select()
             }}
             className="w-full bg-white/90 px-1 py-0.5 text-sm rounded focus:outline-none"
             autoFocus

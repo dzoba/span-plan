@@ -89,6 +89,17 @@ export default function HomePage() {
           </p>
         </div>
 
+        {/* Screenshot */}
+        <div className="max-w-5xl mx-auto mt-16">
+          <div className="rounded-xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-700">
+            <img
+              src="/screenshot.png"
+              alt="SpanPlan timeline view showing projects across multiple rows with drag-and-drop scheduling"
+              className="w-full"
+            />
+          </div>
+        </div>
+
         {/* Core Features */}
         <div className="max-w-5xl mx-auto mt-24 grid md:grid-cols-3 gap-8">
           <div className="text-center p-6">

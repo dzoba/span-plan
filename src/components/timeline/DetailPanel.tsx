@@ -61,6 +61,12 @@ export default function DetailPanel({ item, onUpdate, onDelete, onClose }: Detai
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             onBlur={handleSave}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleSave()
+                ;(e.target as HTMLInputElement).blur()
+              }
+            }}
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             placeholder="Enter title..."
           />
@@ -76,6 +82,12 @@ export default function DetailPanel({ item, onUpdate, onDelete, onClose }: Detai
             value={subtitle}
             onChange={(e) => setSubtitle(e.target.value)}
             onBlur={handleSave}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter') {
+                handleSave()
+                ;(e.target as HTMLInputElement).blur()
+              }
+            }}
             className="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
             placeholder="Enter subtitle..."
           />
